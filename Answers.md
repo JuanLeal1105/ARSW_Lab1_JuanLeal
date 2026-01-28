@@ -40,3 +40,29 @@ Por otro lado, se hace uso de ``.join()`` para que al final se entreguen los cas
 Ocurre que en el caso anterior, donde se crean hilos que trabajan en paralelo, es posible que se estén haciendo más búsquedas de las necesarias entre las listas negras, esto debido a que si el primer hilo encuentra 5 ocurrencias, el resto de hilos de todas formas van a seguir buscando y por ende gastando tiempo y recursos.
 
 Lo anterior se peude mejorar si se deja que la búsqueda finalice tan pronto como se alcance el umbral de ocurrencias, lo cual se puede lograr haciendo uso de una variable compartida que permita que los hilos accedan a la cuenta de ocurrencias para ver si ya se alcanzó el umbral antes de empezar cada búsqueda.
+
+___
+
+### Parte 3. Evaluación de Desempeño
+
+___
+
+### Parte 4. Ejercicio Black List Search
+#### 1. ¿Por qué el mejor desempeño no se logra con 500 hilos?
+Aunque la Ley de Amdahl indica que más hilos deberían mejorar el desempeño:
+
+- No todo el programa se puede paralelizar (parte secuencial \(1-P\)).
+- Muchos hilos generan overhead, lo cual implica sincronización, cambios de contexto y competencia por recursos.
+- Por eso, usar 500 hilos en una máquina con pocos núcleos no mejora el tiempo total y puede incluso empeorarlo.
+- Con 200 hilos ocurre lo mismo, mejora respecto a pocos hilos, pero ya se alcanza un límite práctico.
+
+#### 2. Comparación: tantos hilos como núcleos vs. doble de núcleos
+- Tantos hilos como nucleos del procesador: Cada hilo tiene su núcleo, máxima eficiencia de CPU.
+- Tantos hilos como el doble de nucleos del procesador: Los hilos adicionales compiten por los mismos núcleos y generan overhead.
+
+La conclusión es que, con más hilos que núcleos no significa mejor desempeño en CPU-bound tasks.
+
+#### 3. Distribución en múltiples máquinas
+- 100 máquinas con un 1 hilo por máquina: Cada hilo se ejecuta independientemente, casi sin overhead, cumpliendo mejor la Ley de Amdahl.
+- 100/c máquinas con c hilos por máquina: Todavía hay competencia por cores locales, pero se mejora respecto a muchos hilos en una sola máquina.
+
