@@ -11,11 +11,11 @@ ___
 1. A continuación adjunto la evidencia de la creación de la clase CountThread
 ![img.png](img/MyLabImages/CountThreadImg.png)
 2. Al completar el metodo main de la clase CountThreadsMain se realizaron ambas pruebas, tanto usando run como start y se obtuvo lo siguiente:
-   1. **Con start()**
+   1. **Con ``.start()``**
       
    ![img.png](img/MyLabImages/StartPart1.png)
    
-   3. **Con run()**
+   3. **Con ``.run()``**
       
    ![img.png](img/MyLabImages/RunPart1.png)
    
@@ -26,4 +26,17 @@ ___
 ___
 
 ### Parte 2. Ejercicio Black List Search
+En este caso para la correcta ejecución de este punto del laboratorio se hizo uso de una lógica bastante parecida a la de la parte 1 a la hora de hacer las cuentas, solo que en este caso los intervalos se definieron según la cantidad de servidores y la cantidad de hilos que desea el usuario.
 
+Por otro lado, se hace uso de ``.join()`` para que al final se entreguen los casos de ocurrencias de forma correcta, de tal manera que cada aun cuando se crean hilos en paralelo, se espera a cada hilo finalice para entregar los resultados, permitiendo que en caso tal de que un hilo temrine primerp que otro, no se le de al usuario la respuesta de una vez, sino que se espera a que cada lista negra sea recorrida.
+
+#### Caso IP 202.24.34.55
+![BlackList2.png](img/MyLabImages/BlackList2.png)
+
+#### Caso IP 212.24.24.55
+![BlackList1.png](img/MyLabImages/BlackList1.png)
+
+#### Discusión: Cómo mejorar el número de consultas
+Ocurre que en el caso anterior, donde se crean hilos que trabajan en paralelo, es posible que se estén haciendo más búsquedas de las necesarias entre las listas negras, esto debido a que si el primer hilo encuentra 5 ocurrencias, el resto de hilos de todas formas van a seguir buscando y por ende gastando tiempo y recursos.
+
+Lo anterior se peude mejorar si se deja que la búsqueda finalice tan pronto como se alcance el umbral de ocurrencias, lo cual se puede lograr haciendo uso de una variable compartida que permita que los hilos accedan a la cuenta de ocurrencias para ver si ya se alcanzó el umbral antes de empezar cada búsqueda.
