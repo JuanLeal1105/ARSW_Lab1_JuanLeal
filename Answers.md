@@ -55,11 +55,27 @@ public synchronized boolean stopSearch() {
 ___
 
 ### Parte 3. Evaluación de Desempeño
-![Experimento1.png](img/MyLabImages/Experimento1.png)
-![Experimento2.png](img/MyLabImages/Experimento2.png)
-![Experimento3.png](img/MyLabImages/Experimento3.png)
-![Experimento4.png](img/MyLabImages/Experimento4.png)
-![Experimento5.png](img/MyLabImages/Experimento5.png)
+Como parte de lo requerido por el laboratorio, se realizan cinco experimentos para poder probar el desempeño del programa, a continuación vemos los resultados:
+
+1. **Con un solo hilo**
+   ![Experimento1.png](img/MyLabImages/Experimento1.png)
+   Como podemos ver en la imagen hay momentos donde se ve un pico de uso de CPU, lo cual tiene sentido ya que estamos delegando toda la tarea a un único hilo, por lo cual se ejcuta todo de forma secuencial en lugar de en paralelo. Por otro lado el tiempo de ejecución fue 751 ms según lo reportado por IntelliJ usando ``currentTimeMillis()``
+   
+2. **Con tantos hilos como núcles tiene el procesador**
+   ![Experimento2.png](img/MyLabImages/Experimento2.png)
+   En este caso vemos que no hay unos picos tan pronunciados, sino que por el contrario todo se ve más regulado en la gráfica de uso de CPU. De igual forma el tiempo de ejecución reportado por IntelliJ usando ``currentTimeMillis()`` fue de 168ms, lo cual es un gran avance respecto al tiempo que tomó la búsqueda con un solo hilo y hace sentido si tomamos en cuenta que en este instante esa búsqueda se hace en paralelo y por ende es más rápida que algo secuencial.
+
+3. **Con tantos hilos como el doble de núcleos del procesador**
+   ![Experimento3.png](img/MyLabImages/Experimento3.png)
+   En este caso vemos en la gráfica de CPU que los picos de uso se presentan hacia el inicio, pero al final se regula bastante. En este caso, tel tiempo de ejecución reportado por IntelliJ usando ``currentTimeMillis()`` fue de 128ms y esto se entiende debido a que tenemos más hilos realizando la tarea en conjunto.
+
+4. **Con 50 hilos**
+   ![Experimento4.png](img/MyLabImages/Experimento4.png)
+   Para la cantidad de hilos seleccionada, podemos evidenciar que la gráfica presenta varios picos, lo cual nos indica que la CPU está siendo mucho más usada respecto a los otros casos, puesto que en fotos anteriores vemos normalmente 2 picos pero en este caso vemos 3. El tiempo de ejecución reportado por IntelliJ usando ``currentTimeMillis()`` fue de 125ms lo cual representa una mejora con respecto a lo que se venía obteniendo en tiempo.
+
+5. **Con 100 hilos**
+   ![Experimento5.png](img/MyLabImages/Experimento5.png)
+   En este caso vemos una gráfica bastante parecida a la anterior, de tal forma que podemos indicar que el uso de CPU es similar. Para este caso puntual, el timepo de ejecución reportado por IntelliJ usando ``currentTimeMillis()``  fue de 143ms, lo cual nos indica que aun así, teniendo más hilos, no ejecuta en un menor tiempo y esto se puede deber a que al tener una cantidad considerable de hilos es más compleja la carrera por uso de recursos y sincronización.
 
 ---
 ### Parte 4. Ejercicio Black List Search
