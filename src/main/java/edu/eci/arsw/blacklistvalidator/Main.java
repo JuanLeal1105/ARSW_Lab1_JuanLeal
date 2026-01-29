@@ -7,7 +7,6 @@ package edu.eci.arsw.blacklistvalidator;
 
 import java.util.List;
 import java.util.Scanner;
-import edu.eci.arsw.spamkeywordsdatasource.HostBlacklistsDataSourceFacade;
 
 /**
  *
