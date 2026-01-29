@@ -55,9 +55,13 @@ public synchronized boolean stopSearch() {
 ___
 
 ### Parte 3. Evaluación de Desempeño
+![Experimento1.png](img/MyLabImages/Experimento1.png)
+![Experimento2.png](img/MyLabImages/Experimento2.png)
+![Experimento3.png](img/MyLabImages/Experimento3.png)
+![Experimento4.png](img/MyLabImages/Experimento4.png)
+![Experimento5.png](img/MyLabImages/Experimento5.png)
 
-___
-
+---
 ### Parte 4. Ejercicio Black List Search
 #### 1. ¿Por qué el mejor desempeño no se logra con 500 hilos?
 Aunque la Ley de Amdahl indica que más hilos deberían mejorar el desempeño:
