@@ -37,10 +37,21 @@ Por otro lado, se hace uso de ``.join()`` para que al final se entreguen los cas
 ![BlackList1.png](img/MyLabImages/BlackList1.png)
 
 #### Discusión: Cómo mejorar el número de consultas
-Ocurre que en el caso anterior, donde se crean hilos que trabajan en paralelo, es posible que se estén haciendo más búsquedas de las necesarias entre las listas negras, esto debido a que si el primer hilo encuentra 5 ocurrencias, el resto de hilos de todas formas van a seguir buscando y por ende gastando tiempo y recursos.
+La implementación se puede modificar incorporando una condición de parada temprana compartida, de manera que los hilos detengan la búsqueda cuando, en conjunto, se alcance el número mínimo de ocurrencias necesarias para clasificar un host como malicioso. Esto evita que se sigan realizando consultas innecesarias a las listas negras una vez cumplido el objetivo.
 
-Lo anterior se peude mejorar si se deja que la búsqueda finalice tan pronto como se alcance el umbral de ocurrencias, lo cual se puede lograr haciendo uso de una variable compartida que permita que los hilos accedan a la cuenta de ocurrencias para ver si ya se alcanzó el umbral antes de empezar cada búsqueda.
+Este cambio introduce la sincronización y coordinación entre hilos, ya que es necesario manejar un estado compartido de forma segura para garantizar consistencia y visibilidad de la información durante la ejecución. Por lo anterior se hace uno de un controlador que utiliza ``synchronized`` en sus métodos para garantizar que todos los hilos se "comuniquen" así:
+```
+public synchronized boolean stopSearch() {
+        return stop;
+    }
 
+    public synchronized void reportOccurrence() {
+        totalOccurrences++;
+        if (totalOccurrences >= 5) {
+            stop = true;
+        }
+    }
+```
 ___
 
 ### Parte 3. Evaluación de Desempeño
