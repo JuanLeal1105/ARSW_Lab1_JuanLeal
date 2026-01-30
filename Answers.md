@@ -77,6 +77,25 @@ Como parte de lo requerido por el laboratorio, se realizan cinco experimentos pa
    ![Experimento5.png](img/MyLabImages/Experimento5.png)
    En este caso vemos una gráfica bastante parecida a la anterior, de tal forma que podemos indicar que el uso de CPU es similar. Para este caso puntual, el timepo de ejecución reportado por IntelliJ usando ``currentTimeMillis()``  fue de 143ms, lo cual nos indica que aun así, teniendo más hilos, no ejecuta en un menor tiempo y esto se puede deber a que al tener una cantidad considerable de hilos es más compleja la carrera por uso de recursos y sincronización.
 
+#### Tabla de Resultados y gráfica
+Para lograr establecer unos resultados coherentes y óptimos lo que se hizo fue ejecutar el programa con cada número de hilos cinco veces para así obtener un promedio y no solo enfocarnos en un resultado único puesto que si se ejcuta una única vez, los resultados se peuden ver afectados por la introducción de ruido al momento de procesar las tareas.
+
+**Host evaluado:** `202.24.34.55`
+
+| Número de hilos | Tiempo promedio (ms) |
+|-----------------|----------------------|
+| 1               | 683                  |
+| 8               | 137                  |
+| 16              | 92                   |
+| 50              | 98                   |
+| 100             | 111                  |
+
+
+Ahora bien, con estos resultados procedimos a hacer una gráfica de tiempo solución vs número de hilos, la cual resultó así:
+![Grafica.png](img/MyLabImages/Grafica.png)
+
+Con la gráica y los resultados, se evidencia que, con el uso de múltiples hilos, se mejora significativamente el tiempo de ejecución del algoritmo en comparación con la versión secuencial. El mejor desempeño se alcanza con 16 hilos, donde se logra un aprovechamiento eficiente de los recursos del procesador. Sin embargo, al incrementar aún más el número de hilos, el tiempo de ejecución deja de disminuir e incluso aumenta ligeramente, debido al overhead asociado a la creación, coordinación y sincronización de hilos. Esto demuestra que existe un límite práctico al paralelismo y que un mayor número de hilos no garantiza un mejor rendimiento.
+
 ---
 ### Parte 4. Ejercicio Black List Search
 #### 1. ¿Por qué el mejor desempeño no se logra con 500 hilos?
