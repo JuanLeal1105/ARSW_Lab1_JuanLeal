@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class PerformanceExperiments {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         HostBlackListsValidator validator = new HostBlackListsValidator();
         String ip = "202.24.34.55";
